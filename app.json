@@ -1,0 +1,16 @@
+{
+  "expo": {
+    "name": "my-project",
+    "slug": "my-project",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "9f191eb7-3ab6-4926-a90e-04b7c96ac0af"
+      }
+    }
+  },
+  "name": "my-project"
+}
