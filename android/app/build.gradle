@@ -123,6 +123,11 @@ android {
             signingConfig signingConfigs.release
         }
     }
+
+    repositories {
+               flatDir {dirs 'libs'}
+             }
+
 }
 
 // Apply static values from `gradle.properties` to the `android.packagingOptions`
@@ -145,8 +150,19 @@ android {
     }
 }
 
+
+
+
 dependencies {
-    // The version of react-native is set by the React Native Gradle Plugin
+
+    implementation files('libs/eSewaSdk.aar')
+    implementation "com.android.support:cardview-v7:27.1.1"
+    implementation "com.android.support:design:27.1.1"
+
+    // implementation files('./libs/eSewaSdk.aar')
+    // implementation 'androidx.cardview:cardview:1.0.0' // For CardView
+    // implementation 'com.google.android.material:material:1.4.0' // For Material Design components (AndroidX version)
+    // // The version of react-native is set by the React Native Gradle Plugin
     implementation("com.facebook.react:react-android")
 
     def isGifEnabled = (findProperty('expo.gif.enabled') ?: "") == "true";

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, Dimensions, TouchableOpacity, TextInput, Button } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Map from './components/Map';
@@ -8,10 +8,14 @@ import Account from './components/Account';
 import PageNotAvailable from './components/PageNotAvailable';
 import BusSearch from './components/BusSearch';
 import ProfileCard from './components/cards/ProfileCard';
+import Payment from './components/payments/Payment';
+
+import Esewa from './components/payments/esewa/Esewa';
 
 //navigation imports
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer} from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import ChooseSeats from './components/ChooseSeats';
 // import ProfileCard from './components/cards/ProfileCard';
 
 
@@ -27,7 +31,6 @@ export default function App() {
     latitude: 37.78825,
     longitude: -122.4324,
   });
-
 
 
   const [selectedTab, setSelectedTab] = useState('home');
@@ -68,12 +71,16 @@ export default function App() {
   const renderTabContent = () => {
     switch (selectedTab) {
       case 'home':
-        // return(<BusSearch/>)
         return (
           <NavigationContainer>
             <Stack.Navigator>
               <Stack.Screen name='home' component={Home} options={{ headerShown: false }}/>
               <Stack.Screen name='busSearch' component={BusSearch} options={{ headerShown: false }}/>
+              <Stack.Screen name='paymentPage' component={Payment} options={{ headerShown: false }}/>
+              <Stack.Screen name='chooseSeats' component={ChooseSeats} options={{ headerShown: false }}/>
+              <Stack.Screen name='esewa' component={Esewa} options={{ headerShown: false }}/>
+
+
             </Stack.Navigator>
           </NavigationContainer>
         );
@@ -95,7 +102,7 @@ export default function App() {
     }
   };
 
- 
+
 
   return (
     <View style={styles.container}>
@@ -103,19 +110,20 @@ export default function App() {
       {renderTabContent()}
 
       <View style={styles.bottomNav}>
-        <TouchableOpacity onPress={() => setSelectedTab('home')} style={styles.tab}>
-          <Icon name="home" size={35} color={selectedTab === 'home' ? '#006DFB' : '#242424'}/>
+        <TouchableOpacity onPress={() => {setSelectedTab('home')}} style={styles.tab}>
+          <Icon name="home" size={35} color={selectedTab === 'home' ? '#FD6905' : '#888'}/>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => setSelectedTab('map')} style={styles.tab}>
+        {/* <TouchableOpacity onPress={() => setSelectedTab('map')} style={styles.tab}>
           <Icon name="map" size={35} color={selectedTab === 'map' ? '#006DFB' : '#242424'}/>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
         <TouchableOpacity onPress={() => setSelectedTab('bookings')} style={styles.tab}>
-          <Icon name="book" size={35} color={selectedTab === 'bookings' ? '#006DFB' : '#242424'}/>
+          <Icon name="book" size={35} color={selectedTab === 'bookings' ? '#FD6905' : '#888'}/>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => setSelectedTab('account')} style={styles.tab}>
-          <Icon name="user" size={35} color={selectedTab === 'account' ? '#006DFB' : '#242424'}/>
+          <Icon name="user" size={35} color={selectedTab === 'account' ? '#FD6905' : '#888'}/>
         </TouchableOpacity>
       </View>
+
       
 
     </View>
@@ -125,13 +133,20 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    // backgroundColor: "#fff",
   },
   bottomNav: {
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
-    backgroundColor: '#ccc',
+    backgroundColor: '#E2FFE7',
+    // top: 0,
+    bottom: 5,
     paddingVertical: 20,
+    width: Dimensions.get('screen').width * 0.98,
+    marginLeft: Dimensions.get('screen').width * 0.01,
+    borderRadius: 40,
+    position: 'absolute'
   },
 
   tab: {
