@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="esewasdk_black">#000000</color>
+    <color name="esewasdk_gray_6">#F5F5F5</color>
+    <color name="esewasdk_green1">#77A744</color>
+    <color name="esewasdk_green_button_unchecked">@color/esewasdk_green1</color>
+    <color name="esewasdk_grey">#d9d9d9</color>
+    <color name="esewasdk_grey_light">#F8F8FA</color>
+    <color name="esewasdk_greyesh_light">#5CE9E9E9</color>
+    <color name="esewasdk_primary_color">#2ABB00</color>
+    <color name="esewasdk_red">#FF0000</color>
+    <color name="esewasdk_red_light">#FF7F6A</color>
+    <color name="esewasdk_red_light_05">#0DFF7F6A</color>
+    <color name="esewasdk_semitransparent">#AF000000</color>
+    <color name="esewasdk_text_dark_200">#8E90A6</color>
+    <color name="esewasdk_text_dark_300">#555770</color>
+    <color name="esewasdk_text_dark_400">#28293D</color>
+    <color name="esewasdk_transparent">@android:color/transparent</color>
+    <color name="esewasdk_very_dark_greish_blue_opacity_6">#0F555770</color>
+    <color name="esewasdk_white">#ffffff</color>
+    <string name="esewasdk_amount_npr">Amount (NPR)</string>
+    <string name="esewasdk_app_name">ESewaLibrary</string>
+    <string name="esewasdk_cancel">CANCEL</string>
+    <string name="esewasdk_charge">Charge</string>
+    <string name="esewasdk_checking_credentials">Verifying Merchant ...</string>
+    <string name="esewasdk_current_balance_npr">CURRENT BALANCE (NPR)</string>
+    <string name="esewasdk_email_regex">^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$</string>
+    <string name="esewasdk_enter_code_here">Enter code here</string>
+    <string name="esewasdk_esewa_cashback">eSewa CashBack</string>
+    <string name="esewasdk_esewa_id">eSewa ID</string>
+    <string name="esewasdk_esewa_url">www.esewa.com.np</string>
+    <string name="esewasdk_finish">Finish</string>
+    <string name="esewasdk_login">LOGIN</string>
+    <string name="esewasdk_mpin_password">MPIN/Password</string>
+    <string name="esewasdk_mpin_regex">[0-9]{4}</string>
+    <string name="esewasdk_password">Password</string>
+    <string name="esewasdk_pay">PAY</string>
+    <string name="esewasdk_pay_from">Pay From</string>
+    <string name="esewasdk_pay_to">Pay To</string>
+    <string name="esewasdk_payment_success">PAYMENT SUCCESS</string>
+    <string name="esewasdk_payment_successful">Payment Successful!</string>
+    <string name="esewasdk_product_name">Product Name</string>
+    <string name="esewasdk_register_for_free">REGISTER FOR FREE</string>
+    <string name="esewasdk_sign_in_with">Sign in with</string>
+    <string name="esewasdk_total_amount_npr">Total Amount (NPR)</string>
+    <string name="esewasdk_userId">eSewaId</string>
+    <string name="esewasdk_verification_code">Verification Code</string>
+    <string name="esewasdk_verification_code_info">( A 6 digit verification code has been sent to your mobile number )</string>
+    <string name="esewasdk_verification_code_notice">We have sent you an 6-digit access code via SMS for mobile number verifications</string>
+    <string name="esewasdk_verify_and_confirm">Verify and Confirm</string>
+    <string name="esewasdk_welcome_back">Welcome Back</string>
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowActionBarOverlay">true</item>
+    </style>
+    <style name="EsewaSDK_Button"/>
+    <style name="EsewaSDK_Button.Style" parent="esewasdk_match_parent_wrap_content">
+        <item name="android:background">@drawable/esewasdk_background_edit_text_green</item>
+        <item name="android:textColor">@color/esewasdk_white</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:padding">16dp</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:layout_marginBottom">10dp</item>
+    </style>
+    <style name="EsewaSDK_EditText"/>
+    <style name="EsewaSDK_EditText.Box">
+        <item name="android:paddingLeft">8dp</item>
+        <item name="android:paddingRight">8dp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:maxLength">1</item>
+        <item name="android:background">@drawable/esewasdk_background_edit_text_light_greyish</item>
+        <item name="android:inputType">number</item>
+    </style>
+    <style name="EsewaSDK_EditText.Style" parent="esewasdk_match_parent_wrap_content">
+        <item name="android:background">@drawable/esewasdk_background_edit_text_light_grey</item>
+        <item name="android:layout_marginTop">4dp</item>
+        <item name="android:padding">16dp</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/esewasdk_text_dark_300</item>
+        <item name="android:imeOptions">actionNext</item>
+    </style>
+    <style name="EsewaSDK_Switch.Style" parent="esewasdk_match_parent_wrap_content">
+        <item name="android:layout_margin">3dp</item>
+        <item name="android:theme">@style/SwitchTheme</item>
+        <item name="android:text">Remember this eSewa ID</item>
+        <item name="android:textColor">@color/esewasdk_text_dark_300</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textOn"/>
+        <item name="android:textOff"/>
+    </style>
+    <style name="EsewaSDK_TextAppearance.Ui.Body1" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineSpacingMultiplier">1.4</item>
+        <item name="android:textColor">@color/esewasdk_text_dark_200</item>
+    </style>
+    <style name="EsewaSDK_TextAppearance.Ui.Body2" parent="TextAppearance.MaterialComponents.Body2">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/esewasdk_text_dark_200</item>
+    </style>
+    <style name="EsewaSDK_TextAppearance.Ui.Button" parent="TextAppearance.MaterialComponents.Button">
+        <item name="android:textSize">12sp</item>
+        <item name="android:letterSpacing">0</item>
+    </style>
+    <style name="EsewaSDK_TextAppearance.Ui.Caption" parent="TextAppearance.MaterialComponents.Caption">
+        <item name="android:textSize">10sp</item>
+        <item name="android:textColor">@color/esewasdk_text_dark_200</item>
+    </style>
+    <style name="EsewaSDK_TextAppearance.Ui.Headline1" parent="TextAppearance.MaterialComponents.Headline1">
+        <item name="android:textSize">96sp</item>
+        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="fontFamily">sans-serif-light</item>
+        <item name="android:textColor">@color/esewasdk_text_dark_300</item>
+    </style>
+    <style name="EsewaSDK_TextAppearance.Ui.Headline2" parent="TextAppearance.MaterialComponents.Headline2">
+        <item name="android:textSize">56sp</item>
+        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="fontFamily">sans-serif-light</item>
+        <item name="android:textColor">@color/esewasdk_text_dark_300</item>
+    </style>
+    <style name="EsewaSDK_TextAppearance.Ui.Headline3" parent="TextAppearance.MaterialComponents.Headline3">
+        <item name="android:textSize">44sp</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="fontFamily">sans-serif-medium</item>
+        <item name="android:textColor">@color/esewasdk_text_dark_300</item>
+    </style>
+    <style name="EsewaSDK_TextAppearance.Ui.Headline4" parent="TextAppearance.MaterialComponents.Headline4">
+        <item name="android:textSize">36sp</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="fontFamily">sans-serif</item>
+        <item name="android:textColor">@color/esewasdk_text_dark_300</item>
+    </style>
+    <style name="EsewaSDK_TextAppearance.Ui.Headline5" parent="TextAppearance.MaterialComponents.Headline5">
+        <item name="android:textSize">24sp</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="fontFamily">sans-serif</item>
+        <item name="android:textColor">@color/esewasdk_text_dark_400</item>
+    </style>
+    <style name="EsewaSDK_TextAppearance.Ui.Headline6" parent="TextAppearance.MaterialComponents.Headline6">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/esewasdk_text_dark_300</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="fontFamily">sans-serif-medium</item>
+    </style>
+    <style name="EsewaSDK_TextAppearance.Ui.Overline" parent="TextAppearance.MaterialComponents.Overline">
+        <item name="android:textSize">10sp</item>
+        <item name="android:textColor">@color/esewasdk_text_dark_300</item>
+    </style>
+    <style name="EsewaSDK_TextAppearance.Ui.Subtitle1" parent="TextAppearance.MaterialComponents.Subtitle1">
+        <item name="android:textColor">@color/esewasdk_text_dark_200</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="EsewaSDK_TextAppearance.Ui.Subtitle2" parent="TextAppearance.MaterialComponents.Subtitle2">
+        <item name="android:textSize">12sp</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="fontFamily">sans-serif</item>
+        <item name="android:textColor">@color/esewasdk_text_dark_200</item>
+    </style>
+    <style name="SwitchTheme" parent="Theme.AppCompat.Light">
+        <item name="android:colorControlActivated">@color/esewasdk_primary_color</item>
+        <item name="colorControlActivated">@color/esewasdk_primary_color</item>
+        <item name="colorSwitchThumbNormal">@color/esewasdk_grey</item>
+    </style>
+    <style name="esewasdk_match_parent">
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
+    <style name="esewasdk_match_parent_wrap_content" parent="esewasdk_match_parent">
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    <style name="esewasdk_wrap_content" parent="esewasdk_match_parent_wrap_content">
+        <item name="android:layout_width">wrap_content</item>
+    </style>
+    <declare-styleable name="ProgressWheel">
+        <attr format="boolean" name="progressIndeterminate"/>
+        <attr format="color" name="barColor"/>
+        <attr format="color" name="rimColor"/>
+        <attr format="dimension" name="rimWidth"/>
+        <attr format="float" name="spinSpeed"/>
+        <attr format="integer" name="barSpinCycleTime"/>
+        <attr format="dimension" name="circleRadius"/>
+        <attr format="boolean" name="fillRadius"/>
+        <attr format="dimension" name="barWidth"/>
+        <attr format="boolean" name="linearProgress"/>
+    </declare-styleable>
+</resources>

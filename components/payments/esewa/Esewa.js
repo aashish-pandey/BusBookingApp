@@ -1,15 +1,25 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { TouchableOpacity, ScrollView, Text, Linking, View, Button, StyleSheet, Dimensions } from 'react-native'
+import { SafeAreaView } from 'react-native-safe-area-context';
+import WebView from 'react-native-webview';
+
+
+const html = `
+
+<h1>This is a webview being developed for integrating esewa</h1>
+
+`
 
 export default function Esewa() {
-    
+  
+
+  const handleClick = ()=>{
+  }
     
       return (
-        <View style={styles.main}>
-          <TouchableOpacity style={styles.esewaBtn}>
-            <Text style={styles.btnTxt}>Pay Via Esewa</Text>
-          </TouchableOpacity>
-        </View>
+          <WebView
+            source={require('./index.html')}
+          />
       );
 }
 

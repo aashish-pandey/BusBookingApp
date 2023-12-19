@@ -1,0 +1,5 @@
+-keepparameternames
+-keep class com.f1soft.esewasdk.ESewaConfiguration { *; }
+-keep class com.f1soft.esewasdk.ESewaPayment { *; }
+-keep class com.f1soft.esewasdk.ESewaConfiguration$Companion { *; }
+-keep class com.f1soft.esewasdk.ESewaPayment$Companion { *; }

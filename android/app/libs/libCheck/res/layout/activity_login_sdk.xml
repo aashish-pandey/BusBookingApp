@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fillViewport="true"
+    android:scrollbars="none"
+    android:overScrollMode="never"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/esewasdk_white">
+
+        <RelativeLayout
+            android:id="@+id/header_esewa"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/ic_dot_circle" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_semi_circle_pattern" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="-30dp"
+                    android:layout_marginLeft="-30dp"
+                    android:src="@drawable/ic_brand_esewa" />
+
+            </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/buttonCancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/ic_cancel" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="26dp"
+            android:paddingRight="26dp"
+            android:paddingBottom="26dp"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/welcome_back_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/esewasdk_welcome_back"
+                android:textSize="36sp"
+                android:textColor="@color/esewasdk_text_dark_300"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/esewasdk_sign_in_with"
+                android:textAppearance="@style/EsewaSDK_TextAppearance.Ui.Subtitle1"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="@string/esewasdk_esewa_id"
+                android:textSize="12sp"
+                android:textColor="@color/esewasdk_text_dark_200"/>
+
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/editTextUsername"
+                style="@style/EsewaSDK_EditText.Style"
+                android:inputType="text"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="@string/esewasdk_mpin_password"
+                android:textSize="12sp"
+                android:textColor="@color/esewasdk_text_dark_200" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/editTextPassword"
+                style="@style/EsewaSDK_EditText.Style"
+                android:drawableEnd="@drawable/esewasdk_ic_view_password"
+                android:inputType="textPassword"
+                android:drawableRight="@drawable/esewasdk_ic_view_password" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/rememberSwitch"
+                style="@style/EsewaSDK_Switch.Style"
+                android:layout_marginTop="10dp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/buttonSignIn"
+                style="@style/EsewaSDK_Button.Style"
+                android:layout_marginTop="30dp"
+                android:text="@string/esewasdk_login"/>
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:src="@drawable/ic_semi_circle_pattern_big" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/buttonRegister"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="64dp"
+                android:gravity="center"
+                android:text="@string/esewasdk_register_for_free"
+                android:textColor="@color/esewasdk_primary_color"
+                android:textSize="14sp" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

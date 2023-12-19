@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/esewasdk_white"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="@string/esewasdk_payment_success"
+                android:textAppearance="@style/EsewaSDK_TextAppearance.Ui.Headline6"
+                android:textColor="@color/esewasdk_text_dark_400" />
+
+        </RelativeLayout>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/img_cirlce_check_sdk"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/esewasdk_payment_successful"
+            android:textAppearance="@style/EsewaSDK_TextAppearance.Ui.Headline5"
+            android:gravity="center"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/productNameTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            tools:text="Your sdk payment is done"
+            android:textAppearance="@style/EsewaSDK_TextAppearance.Ui.Subtitle1"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="80dp"
+            android:baselineAligned="false">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/esewasdk_pay_from"
+                    android:textSize="10sp"
+                    android:textColor="@color/esewasdk_text_dark_300"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/payFromTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="Marie"
+                    android:textAppearance="@style/EsewaSDK_TextAppearance.Ui.Headline6"
+                    android:textColor="@color/esewasdk_text_dark_400"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/esewasdk_pay_to"
+                    android:textSize="10sp"
+                    android:textColor="@color/esewasdk_text_dark_300"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/payToTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="SDK Payemnt"
+                    android:textAppearance="@style/EsewaSDK_TextAppearance.Ui.Headline6"
+                    android:textColor="@color/esewasdk_text_dark_400"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/amountTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/esewasdk_background_text_view_orange"
+            android:padding="12dp"
+            android:layout_margin="40dp"
+            android:gravity="center"
+            android:textColor="@color/esewasdk_red_light"
+            android:textSize="22sp"
+            tools:text="NPR. XXXX.XX"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/finishBtn"
+            style="@style/EsewaSDK_Button.Style"
+            android:layout_margin="30dp"
+            android:text="@string/esewasdk_finish"/>
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>
