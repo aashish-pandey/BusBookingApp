@@ -28,7 +28,7 @@ const handleBookNow = ()=>{
     <View>
       <ScrollView>
         <View style={styles.main}>
-            <BusBookHeading/>
+            <BusBookHeading parent={'busSearch'}/>
             <View style={styles.enlargeGreenBox}></View>
             <View style={styles.detailsBox}>
                    <View style={styles.detailsRow}>
@@ -268,7 +268,8 @@ const styles = StyleSheet.create({
         borderTopRightRadius: 70,
         display: 'flex',
         alignItems: 'center',
-        paddingBottom: 50
+        paddingBottom: 50,
+        marginBottom: 100
         // justifyContent: 'center'
     },
     busDoor: {
@@ -360,7 +361,7 @@ const styles = StyleSheet.create({
     },
     bookNowBtnView:{
         position: 'absolute',
-        top: Dimensions.get('screen').height * 0.76,
+        top: Dimensions.get('screen').height * 0.86,
         left: Dimensions.get('screen').width * 0.065,
         zIndex: 5
     }

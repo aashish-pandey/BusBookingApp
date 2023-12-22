@@ -12,9 +12,10 @@ export default function BusSearch({ navigation }) {
 
     
     return (
+        <>
         <ScrollView>
             <View style={styles.main}>
-                <BusBookHeading/>
+                <BusBookHeading parent={'home'}/>
 
                 <View style={styles.busInfo}>
                 <BusInfoCard />
@@ -28,6 +29,7 @@ export default function BusSearch({ navigation }) {
 
             </View>
         </ScrollView>
+        </>
     )
 }
 

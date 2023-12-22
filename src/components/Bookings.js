@@ -2,9 +2,11 @@ import React, {useState} from 'react';
 import {View, Text, StyleSheet, Dimensions, ScrollView} from 'react-native';
 
 import JourneyCard from './cards/JourneyCard';
+import MainBottomBar from './MainBottomBar';
 
 export default function Bookings(){
     return(
+        <>
         <ScrollView>
             <View style = {styles.tabContent}>
                 <Text style = {styles.textHeading}>
@@ -27,6 +29,8 @@ export default function Bookings(){
                 </View>
             </View>
         </ScrollView>
+        <MainBottomBar/>
+        </>
     )
 }
 

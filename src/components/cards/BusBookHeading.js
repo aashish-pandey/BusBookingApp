@@ -6,10 +6,10 @@ import BusInfoCard from './BusInfoCard'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native'
 
-export default function BusBookHeading() {
+export default function BusBookHeading({parent}) {
     const navigation = useNavigation()
     const handleGoBack = ()=>{
-        navigation.navigate('home')
+        navigation.navigate(parent)
     }
   return (
     <View style={styles.heading}>

@@ -1,22 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, Dimensions, TouchableOpacity, TextInput, Button } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import Map from './components/Map';
-import Home from './components/Home';
-import Bookings from './components/Bookings';
-import Account from './components/Account';
-import PageNotAvailable from './components/PageNotAvailable';
-import BusSearch from './components/BusSearch';
-import ProfileCard from './components/cards/ProfileCard';
-import Payment from './components/payments/Payment';
+import Map from './src/components/Map';
+import Home from './src/components/Home';
+import Bookings from './src/components/Bookings';
+import Account from './src/components/Account';
+import PageNotAvailable from './src/components/PageNotAvailable';
+import BusSearch from './src/components/BusSearch';
+import ProfileCard from './src/components/cards/ProfileCard';
+import Payment from './src/components/payments/Payment';
 
-import Esewa from './components/payments/esewa/Esewa';
+import Esewa from './src/components/payments/esewa/Esewa';
 
 //navigation imports
 import { NavigationContainer} from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import ChooseSeats from './components/ChooseSeats';
-// import ProfileCard from './components/cards/ProfileCard';
+import ChooseSeats from './src/components/ChooseSeats';
+import { useSelector } from 'react-redux';
+import store from './src/store';
+import MainBottomBar from './src/components/MainBottomBar';
+// import ProfileCard from './src/components/cards/ProfileCard';
+
 
 
 
@@ -26,14 +29,22 @@ const Stack = createStackNavigator()
 
 export default function App() {
 
-  const [searchInput, setSearchInput] = useState('');
-  const [markerCoordinates, setMarkerCoordinates] = useState({
-    latitude: 37.78825,
-    longitude: -122.4324,
+  const [selectedTab, setSelectedTab] = useState(selectedPage);
+  
+  const selectedPage = useSelector((state)=>{
+    return state.page;
   });
+  if(selectedPage != selectedTab)setSelectedTab(selectedPage);
+  console.log(selectedPage)
 
 
-  const [selectedTab, setSelectedTab] = useState('home');
+  const [searchInput, setSearchInput] = useState('');
+  // const [markerCoordinates, setMarkerCoordinates] = useState({
+  //   latitude: 37.78825,
+  //   longitude: -122.4324,
+  // });
+
+
 
   const [mapRegion, setMapRegion] = useState({
     latitude: 37.78825,
@@ -102,6 +113,7 @@ export default function App() {
     }
   };
 
+  
 
 
   return (
@@ -109,24 +121,11 @@ export default function App() {
       
       {renderTabContent()}
 
-      <View style={styles.bottomNav}>
-        <TouchableOpacity onPress={() => {setSelectedTab('home')}} style={styles.tab}>
-          <Icon name="home" size={35} color={selectedTab === 'home' ? '#FD6905' : '#888'}/>
-        </TouchableOpacity>
-        {/* <TouchableOpacity onPress={() => setSelectedTab('map')} style={styles.tab}>
-          <Icon name="map" size={35} color={selectedTab === 'map' ? '#006DFB' : '#242424'}/>
-        </TouchableOpacity> */}
-        <TouchableOpacity onPress={() => setSelectedTab('bookings')} style={styles.tab}>
-          <Icon name="book" size={35} color={selectedTab === 'bookings' ? '#FD6905' : '#888'}/>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => setSelectedTab('account')} style={styles.tab}>
-          <Icon name="user" size={35} color={selectedTab === 'account' ? '#FD6905' : '#888'}/>
-        </TouchableOpacity>
-      </View>
-
+      {/* <MainBottomBar/> */}
       
 
     </View>
+
   );
 }
 

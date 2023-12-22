@@ -1,8 +1,10 @@
 import { useNavigation } from '@react-navigation/native'
-import React, { useState } from 'react'
-import { ScrollView, Text, TouchableOpacity, Alert } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import { ScrollView, Text, TouchableOpacity, Alert, BackHandler, AppState } from 'react-native'
 
 export default function Payment() {
+
+  const [appState, setAppState] = useState(AppState.currentState);
 
   const [formData, setFormData] = useState({
     amount: '100',
@@ -22,6 +24,25 @@ export default function Payment() {
     const handleEsewa = ()=>{
         navigation.navigate('esewa');
     }
+
+    useEffect(()=>{
+      const backAction = ()=>{
+        console.log('call api to free reserved seat');
+        return false;
+      }
+
+      if((appState.match(/inactive|background/) || appState === 'active')){
+        console.log('call api to free researved seat');
+      }
+
+      const backHandler = BackHandler.addEventListener('hardwareBackPress', backAction);
+
+      return ()=>{
+        backHandler.remove();
+      }
+
+
+    }, [appState])
 
    
   return (

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, Dimensions, TouchableOpacity, TextInput, Button, Platform, ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import JourneyCard from './cards/JourneyCard';
+import MainBottomBar from './MainBottomBar';
 
 
 
@@ -125,6 +126,8 @@ export default function Home({ navigation }) {
 
 
     return (
+        <>
+        
         <ScrollView>
             <View style={styles.mainStart}>
 
@@ -220,6 +223,8 @@ export default function Home({ navigation }) {
                 </View>
             </View>
         </ScrollView>
+        <MainBottomBar/>
+        </>
     )
 
 };
