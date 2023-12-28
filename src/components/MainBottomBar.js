@@ -54,18 +54,19 @@ const styles = StyleSheet.create({
       flexDirection: 'row',
       justifyContent: 'space-around',
       alignItems: 'center',
-      backgroundColor: '#E2FFE7',
+      backgroundColor: '#fff',
       // top: 0,
       bottom: 5,
-      paddingVertical: 20,
-      width: Dimensions.get('screen').width * 0.98,
+      paddingVertical: 3,
+      width: '100%',
       marginLeft: Dimensions.get('screen').width * 0.01,
-      borderRadius: 40,
+      borderRadius: 4,
       position: 'absolute'
     },
   
     tab: {
       alignItems: 'center',
+      padding: 10,
     },
     tabContent: {
       flex: 1,

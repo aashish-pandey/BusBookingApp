@@ -16,13 +16,13 @@ export default function BusBookHeading({parent}) {
                     <View style={styles.headingTopRow}>
 
                         <View>
-                            <TouchableOpacity onPress={handleGoBack}>
+                            <TouchableOpacity onPress={handleGoBack} style={styles.iconBtn}>
                                 <Icon name="arrow-left" size={25} color="#fff"/>
                             </TouchableOpacity>
                         </View>
 
                         <View>
-                            <TouchableOpacity onPress={handleGoBack}>
+                            <TouchableOpacity onPress={handleGoBack} style={styles.iconBtn}>
                                 <Icon name="sliders" size={35} color="#fff"/>
                             </TouchableOpacity>
                         </View>
@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-between',
-        paddingTop: 30,
+        // paddingTop: 30,
         paddingHorizontal: 20,
     },
     searchHeading: {
@@ -88,6 +88,9 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center'
+    },
+    iconBtn:{
+        padding: 15
     }
 })
 

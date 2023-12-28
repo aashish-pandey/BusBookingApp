@@ -1,26 +1,52 @@
-import React, { useEffect } from 'react'
-import { TouchableOpacity, ScrollView, Text, Linking, View, Button, StyleSheet, Dimensions } from 'react-native'
+import React, { useEffect, useRef } from 'react'
+import { TouchableOpacity, ScrollView, Text, Linking, View, Button, StyleSheet, Dimensions, NativeModules } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import WebView from 'react-native-webview';
+import base64 from 'react-native-base64';
 
 
-const html = `
 
-<h1>This is a webview being developed for integrating esewa</h1>
-
-`
 
 export default function Esewa() {
   
 
-  const handleClick = ()=>{
+  const handleClick = async()=>{
+    const total_amount = "100";
+    const transaction_uuid = "11-200-111sss1";
+    const product_code = "EPAYTEST";
+    const secret = "8gBm/:&EnhH.1/q";
+    const msg = `total_amount=${total_amount},transaction_uuid=${transaction_uuid},product_code=${product_code}`;
+    const secretKey = `${secret}`;
+    
+    // JSHmac("aashish", "aashish", CONSTANTS.HmacAlgorithms.HmacSHA256)
+    // .then(hash => {
+    //   var nw = base64.encode(hash);
+    //   console.log(nw)})
+    // .catch(e => console.log(e));
+
   }
+
+
+  const webViewRef = useRef(null);
+
+  const injectJavaScript = `
+    document.getElementById('total_amount').value = '100';
+    document.getElementById('transaction_uuid').value = '11-200-111sss1';
+    document.getElementById('product_code').value = 'EPAYTEST';
+    document.getElementById('secret').value = '8gBm/:&EnhH.1/q';
+  `;
     
       return (
           <WebView
-            source={require('./index.html')}
+            source={{uri: "https://aashish-pandey.github.io/EsewaRedirectLogin/?amount=150&tax_amount=0&product_code=EPAYTEST&secret=8gBm/:%26EnhH.1/q"}}
+            
           />
+
+          
       );
+
+
+ 
 }
 
 const styles = StyleSheet.create({

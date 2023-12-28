@@ -1,23 +1,67 @@
-import React from 'react';
-import { View, Text, StyleSheet, Dimensions, TouchableOpacity } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, StyleSheet, Dimensions, TouchableOpacity, Alert } from 'react-native';
 
-export default function ProfileCard({navigation}){
+import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import MainBottomBar from '../MainBottomBar';
+import { setLoginStatus } from '../../store/slices/loginSlice';
+import { useNavigation } from '@react-navigation/native';
+
+
+export default function ProfileCard(){
+
+  const userInRedux = useSelector((state)=>{
+    return state.user;
+  })
+
+  const navigation = useNavigation();
+
+  const dispatch = useDispatch();
 
   const handleLogout = ()=>{
-    navigation.popToTop();
+    dispatch(setLoginStatus('false'));
+    navigation.navigate('Login')
   }
   // Sample user data
-  const userData = {
-    name: 'John Doe',
-    phoneNumber: '123-456-7890',
-    email: 'johndoe@example.com',
-    dateOfBirth: 'January 1, 1990',
-    completedTrips: 20,
-    missedTrips: 3,
-    canceledTrips: 5,
-  };
+   
+  const [ry, setRy] = useState('');
+
+  const [userData, setUserData] = useState(
+    {
+      name: 'John Doe',
+      phoneNumber: '123-456-7890',
+      email: 'johndoe@example.com',
+    }
+  );
+
+  useEffect(()=>{
+
+    async function fetch(){
+    try{
+    const dataToSend = {
+      email: userInRedux.email,
+    }
+
+    const response = await axios.post("https://backend.merobus.xyz/userDetailsByEmail", dataToSend);
+
+    if(response.status === 201){
+      // Alert.alert("Successful in fetching user data");
+      setUserData(response.data.data);
+      console.log(response.data.data);
+    }else{
+      Alert.alert("User Data Fetch Failed", "Try logging out of your account and again log in");
+    }
+  }catch(error){
+    Alert.alert("Error", "There was error while fetching the user data");
+    console.error("User Detail By Email Error", error);
+  }
+    }
+
+    fetch();
+  }, [ry])
 
   return (
+    <View>
     <View style={styles.main}>
     <View style={styles.card}>
         <View style={styles.topHeading}>
@@ -27,6 +71,16 @@ export default function ProfileCard({navigation}){
             </TouchableOpacity>
         </View>
       <View style={styles.info}>
+
+      <View style={styles.text}>
+            <Text style={styles.valueDesignation}>
+                User ID
+            </Text>
+
+            <Text style={styles.value}>
+                {userData.id}
+            </Text>
+        </View>
 
         <View style={styles.text}>
             <Text style={styles.valueDesignation}>
@@ -53,24 +107,16 @@ export default function ProfileCard({navigation}){
                 {userData.email}
             </Text>
         </View>
-        <View style={styles.text}>
-            <Text style={styles.valueDesignation}>
-                DOB
-            </Text>
- 
-            <Text style={styles.value}>
-                {userData.dateOfBirth}
-            </Text>
-        </View>
+       
 
         <TouchableOpacity style={[styles.button, styles.completedbutton]}>
-            <Text style={styles.buttonText}>Total Completed Trips: {userData.completedTrips}</Text>
+            <Text style={styles.buttonText}>Total Completed Trips: 10</Text>
         </TouchableOpacity>
         <TouchableOpacity style={[styles.button, styles.downloadbutton]}>
-            <Text style={styles.buttonText}>Total Missed Trips: {userData.missedTrips}</Text>
+            <Text style={styles.buttonText}>Total Missed Trips: 0</Text>
         </TouchableOpacity>
         <TouchableOpacity style={[styles.button, styles.cancelledbutton]}>
-            <Text style={styles.buttonText}>Total Canceled Trips: {userData.canceledTrips}</Text>
+            <Text style={styles.buttonText}>Total Canceled Trips: 5</Text>
         </TouchableOpacity>
         {/* <Text style={styles.text}>Total Completed Trips: {userData.completedTrips}</Text>
         <Text style={styles.text}>Total Missed Trips: {userData.missedTrips}</Text>
@@ -90,25 +136,26 @@ export default function ProfileCard({navigation}){
             <Text style={[styles.buttonText, styles.boldText]}>Delete Account</Text>
         </TouchableOpacity>
     </View>
+        <MainBottomBar/>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   main:{
-    // minHeight: Dimensions.get('window').height,
-    flex: 1,
+    minHeight: Dimensions.get('window').height * 0.95,
+    display: 'flex',
     justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#000'
+    alignItems: 'center'
   },
 
   card: {
-    backgroundColor: '#151515',
+    backgroundColor: '#fff',
     borderRadius: 10,
     padding: 20,
     margin: 10,
     width: Dimensions.get('window').width * 0.9,
-    shadowColor: '#fff',
+    shadowColor: '#ccc',
     shadowOffset: {
       width: 0,
       height: 2,
@@ -136,7 +183,7 @@ const styles = StyleSheet.create({
   },
 
   text: {
-    color: '#fff',
+    // color: '#fff',
     fontSize: 20,
     lineHeight: 30,
     display: 'flex',
@@ -145,11 +192,11 @@ const styles = StyleSheet.create({
   },
   value: {
     fontSize: 15,
-    color: '#fff',
+    // color: '#fff',
   },
   valueDesignation: {
     fontSize: 20,
-    color: '#fff',
+    // color: '#fff',
   },
   button: {
     backgroundColor: '#006DFB',
@@ -160,7 +207,7 @@ const styles = StyleSheet.create({
   },
 
 buttonText: {
-    color: '#fff',
+    // color: '#fff',
     fontSize: 12,
     fontWeight: 'bold',
     textAlign: 'center'

@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, Dimensions, TouchableOpacity, TextInput, Button } from 'react-native';
+
+import DeviceInfo from 'react-native-device-info';
+
 import Map from './src/components/Map';
 import Home from './src/components/Home';
 import Bookings from './src/components/Bookings';
@@ -18,6 +21,9 @@ import ChooseSeats from './src/components/ChooseSeats';
 import { useSelector } from 'react-redux';
 import store from './src/store';
 import MainBottomBar from './src/components/MainBottomBar';
+import PassengerInformation from './src/components/passengerInformation/PassengerInformation';
+import Register from './src/components/Register';
+import Login from './src/components/Login';
 // import ProfileCard from './src/components/cards/ProfileCard';
 
 
@@ -30,12 +36,30 @@ const Stack = createStackNavigator()
 export default function App() {
 
   const [selectedTab, setSelectedTab] = useState(selectedPage);
-  
+  const [loginStatus, setLoginStatus] = useState('false');
+
   const selectedPage = useSelector((state)=>{
     return state.page;
   });
-  if(selectedPage != selectedTab)setSelectedTab(selectedPage);
-  console.log(selectedPage)
+  // if(selectedPage != selectedTab)setSelectedTab(selectedPage);
+  // console.log(selectedPage)
+
+  const loginStatusInfo = useSelector((state)=>{
+    return state.loginStatus;
+  })
+
+  
+
+  useEffect(()=>{
+
+    DeviceInfo.getAndroidId().then((androidId) => {
+      // androidId here
+      console.log(androidId);
+    });
+
+    setSelectedTab(selectedPage);
+    setLoginStatus(loginStatusInfo);
+  }, [selectedPage, loginStatus])
 
 
   const [searchInput, setSearchInput] = useState('');
@@ -87,8 +111,9 @@ export default function App() {
             <Stack.Navigator>
               <Stack.Screen name='home' component={Home} options={{ headerShown: false }}/>
               <Stack.Screen name='busSearch' component={BusSearch} options={{ headerShown: false }}/>
-              <Stack.Screen name='paymentPage' component={Payment} options={{ headerShown: false }}/>
               <Stack.Screen name='chooseSeats' component={ChooseSeats} options={{ headerShown: false }}/>
+              <Stack.Screen name='passengerInformation' component={PassengerInformation} options={{ headerShown: false }}/>
+              <Stack.Screen name='paymentPage' component={Payment} options={{ headerShown: false }}/>
               <Stack.Screen name='esewa' component={Esewa} options={{ headerShown: false }}/>
 
 
@@ -100,11 +125,25 @@ export default function App() {
       case 'bookings':
         return (<Bookings/>);
       case 'account':
+        if(loginStatus == 'true'){
+          return(
+            <NavigationContainer>
+            <Stack.Navigator>
+              <Stack.Screen name='ProfileCard' component={ProfileCard} options={{ headerShown: false }}/>
+              <Stack.Screen name='Login' component={Login} options={{ headerShown: false }}/>
+              <Stack.Screen name='Account' component={Account} options={{ headerShown: false }}/>
+              <Stack.Screen name='Register' component={Register} options={{ headerShown: false }}/>
+            </Stack.Navigator>
+          </NavigationContainer>
+          )
+        }
         return(
           <NavigationContainer>
             <Stack.Navigator>
+              <Stack.Screen name='Login' component={Login} options={{ headerShown: false }}/>
               <Stack.Screen name='Account' component={Account} options={{ headerShown: false }}/>
               <Stack.Screen name='ProfileCard' component={ProfileCard} options={{ headerShown: false }}/>
+              <Stack.Screen name='Register' component={Register} options={{ headerShown: false }}/>
             </Stack.Navigator>
           </NavigationContainer>
         )

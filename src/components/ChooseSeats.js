@@ -21,7 +21,7 @@ const handleSeatSelection = ()=>{
 }
 
 const handleBookNow = ()=>{
-    navigation.navigate('paymentPage')
+    navigation.navigate('passengerInformation')
 }
 
   return (
@@ -84,7 +84,7 @@ const handleBookNow = ()=>{
                 <View style={styles.seatSection}>
                     <View style={styles.seatRow}>
                     <View style={[styles.seat, seatSelected ? styles.orangeSeat : styles.whiteSeat]}>
-                        <TouchableOpacity onPress={handleSeatSelection}>
+                        <TouchableOpacity onPress={handleSeatSelection} style={styles.seatBtn}>
                             <Text>A1</Text>
                         </TouchableOpacity>
                     </View>
@@ -317,8 +317,8 @@ const styles = StyleSheet.create({
         marginVertical: 6
     },
     seat:{
-        height: 40,
-        width: 40,
+        height: 45,
+        width: 45,
         borderRadius: 8,
         backgroundColor: '#fff',
         display: 'flex',
@@ -346,7 +346,7 @@ const styles = StyleSheet.create({
         // position: 'absolute',
         // left: -Dimensions.get('screen').width * 0.43,
         // top: Dimensions.get('window').height * 0.1,
-        padding: 15,
+        // padding: 15,
         paddingHorizontal: 20,
         borderRadius: 10,
         marginBottom: 100,
@@ -357,13 +357,17 @@ const styles = StyleSheet.create({
     },
     bookNowBtnTxt: {
         color: 'white',
-        fontSize: 18
+        fontSize: 18,
+        padding: 15,
     },
     bookNowBtnView:{
         position: 'absolute',
         top: Dimensions.get('screen').height * 0.86,
         left: Dimensions.get('screen').width * 0.065,
         zIndex: 5
+    },
+    seatBtn:{
+        padding: 15,
     }
 
 })

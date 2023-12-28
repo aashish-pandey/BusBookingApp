@@ -20,13 +20,13 @@ export default function Account({navigation}){
 }
 
 const styles = StyleSheet.create({
-    tabContent: {
-        flex: 1, 
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#000'
-    }, 
-    button: {
-        backgroundColor: '#006DFB'
-    }
+    // tabContent: {
+    //     flex: 1, 
+    //     alignItems: 'center',
+    //     justifyContent: 'center',
+    //     // backgroundColor: '#000'
+    // }, 
+    // button: {
+    //     backgroundColor: '#006DFB'
+    // }
 })
