@@ -4,6 +4,9 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import JourneyCard from './cards/JourneyCard';
 import MainBottomBar from './MainBottomBar';
 import axios from 'axios';
+import { getTripInfo } from '../services/api';
+import { useDispatch } from 'react-redux';
+import { setJourneyInfo } from '../store/slices/journeyInfoSlice';
 
 
 
@@ -17,19 +20,22 @@ export default function Home({ navigation }) {
 
     const inputRef = useRef(null);
 
+    const dispatch = useDispatch();
+
     const handleSearch = async() => {
-        console.log('Searching for:', {
-            singleTrip: true,
-            fromLocation,
-            toLocation,
-            selectedDate,
-        });
+    
         try{
 
-            const response =  await axios.post('http://localhost:3000/')
-            console.log(response)
+            const dataToSend = {
+                from: fromLocation,
+                to: toLocation,
+                date: selectedDate
+            }
 
-            navigation.navigate('busSearch')
+            const response = await getTripInfo(dataToSend);
+            dispatch(setJourneyInfo(response))
+
+            navigation.navigate('busSearch', {response, dataToSend})
         }catch(error){
             console.log(error);
             Alert.alert("Cannot search for the entered values at the moment! please try again later")

@@ -6,22 +6,25 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 import { useNavigation } from '@react-navigation/native'
 
-export default function BusInfoCard() {
+export default function BusInfoCard({data}) {
+    console.log("card")
+    console.log(data);
+    // const busInfo = {
+    //     busOperator: "Mahakali Yatayat",
+    //     origin: 'Kathmandu',
+    //     destination: 'Pokhara',
+    //     startTime: '7:50 PM',
+    //     endTime: '4:20 AM',
+    //     travelTime: '8 hr 30 min',
+    //     startDate: '19 feb 2024',
+    //     endDate: '20 feb 2024',
+    //     ticketPrice: 'Rs 1500',
+    //     remainingSeats: '2',
+    //     totalSeats: '36',
+    //     type: 'AC'
+    // }
 
-    const busInfo = {
-        busOperator: "Mahakali Yatayat",
-        origin: 'Kathmandu',
-        destination: 'Pokhara',
-        startTime: '7:50 PM',
-        endTime: '4:20 AM',
-        travelTime: '8 hr 30 min',
-        startDate: '19 feb 2024',
-        endDate: '20 feb 2024',
-        ticketPrice: 'Rs 1500',
-        remainingSeats: '2',
-        totalSeats: '36',
-        type: 'AC'
-    }
+    const busInfo = data;
 
     const navigation = useNavigation();
 
@@ -35,7 +38,7 @@ export default function BusInfoCard() {
 
                 <View style={styles.headingTitleHeight}>
                     <Text style={styles.heading1Text}>
-                        {busInfo.busOperator}
+                        {busInfo.operator}
                     </Text>
                 </View>
                 <View style={styles.bodySection}>
@@ -48,9 +51,9 @@ export default function BusInfoCard() {
                         <Text style={styles.AddressText}>
                             {busInfo.origin}
                         </Text>
-                        <Text>
+                        {/* <Text>
                             {busInfo.startDate}
-                        </Text>
+                        </Text> */}
                     </View>
                 </View>
                 <View style={[styles.headingHeight, styles.leftAddress]}>
@@ -61,17 +64,27 @@ export default function BusInfoCard() {
                         <Text style={styles.AddressText}>
                             {busInfo.destination}
                         </Text>
-                        <Text>
+                        {/* <Text>
                             {busInfo.endDate}
-                        </Text>
+                        </Text> */}
                     </View>
+                    
+                </View>
+
+                <View style={[styles.leftAddress, styles.indexBtnSection]}>
+                    <TouchableOpacity style={[styles.indexBtnGreen]}>
+                            <Text style={styles.indexBtnText}>{busInfo.availableSeats}/{busInfo.totalSeats} seats</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={[styles.indexBtnOrange]}>
+                        <Text style={styles.indexBtnText}>{busInfo.busType}</Text>
+                    </TouchableOpacity>
                 </View>
                 </View>
             </View>
             <View style={styles.right}>
                 <View style={styles.headingTitleHeight}>
                     <Text style={styles.heading1Text}>
-                        {busInfo.startTime}
+                        {busInfo.departureTime}
                     </Text>
                 </View>
 
@@ -87,6 +100,12 @@ export default function BusInfoCard() {
                             {busInfo.ticketPrice}
                         </Text>
                     </View>
+
+                    {/* <View style={[styles.priceSection]}>
+                        <Text>
+                            Time: {busInfo.journeyHour} hours
+                        </Text>
+                    </View> */}
                 </View>
 
             </View>
@@ -100,7 +119,7 @@ export default function BusInfoCard() {
 const styles = StyleSheet.create({
     container: {
         width: Dimensions.get('screen').width * 0.9,
-        height: Dimensions.get('screen').height * 0.20,
+        minHeight: Dimensions.get('screen').height * 0.20,
         elevation: 30,
         backgroundColor: '#fff',
         marginVertical: 20,
@@ -212,6 +231,21 @@ const styles = StyleSheet.create({
     priceValueText:{
         fontWeight: '700',
         fontSize: 18
+    },
+    indexBtnOrange:{
+        backgroundColor: '#E2FFE7'   
+    },
+    indexBtnGreen:{
+        backgroundColor: '#FFF2E2'
+    },
+    indexBtnText:{
+        color: '#000',
+        fontSize: 14
+    }, 
+    indexBtnSection:{
+        paddingHorizontal: 20,
+        marginBottom: 10,
+        justifyContent: 'space-between'
     }
 
 })

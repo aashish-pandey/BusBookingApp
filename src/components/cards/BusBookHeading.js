@@ -6,8 +6,19 @@ import BusInfoCard from './BusInfoCard'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native'
 
-export default function BusBookHeading({parent}) {
+export default function BusBookHeading({parent, data}) {
     const navigation = useNavigation()
+
+    let dt = {
+        from: '',
+        to: '',
+        data: ''
+    }
+
+    if(!data){
+        data = dt;
+    }
+    console.log(data)
     const handleGoBack = ()=>{
         navigation.navigate(parent)
     }
@@ -21,16 +32,11 @@ export default function BusBookHeading({parent}) {
                             </TouchableOpacity>
                         </View>
 
-                        <View>
-                            <TouchableOpacity onPress={handleGoBack} style={styles.iconBtn}>
-                                <Icon name="sliders" size={35} color="#fff"/>
-                            </TouchableOpacity>
-                        </View>
 
-                    </View>
+                    <View>
                     <View style={styles.searchHeading}>
                         <View>
-                            <Text style={styles.headingText}>Kathmandu</Text>
+                            <Text style={styles.headingText}>{data.from}</Text>
                         </View>
                         <View>
 
@@ -39,10 +45,17 @@ export default function BusBookHeading({parent}) {
 
                         </View>
                         <View>
-                            <Text style={styles.headingText}>Pokhara</Text>
+                            <Text style={styles.headingText}>{data.to}</Text>
                         </View>
                     </View>
+
+                    <View style={styles.searchHeading}>
+                        <Text style={styles.headingText}>{data.date}</Text>
+                    </View>
+                    </View>
+                    </View>
                 </View>
+
   )
 }
 
@@ -58,9 +71,10 @@ const styles = StyleSheet.create({
     heading: {
         backgroundColor: '#129C38',
         width: Dimensions.get('screen').width,
-        height: Dimensions.get('screen').height * 0.14,
-        borderBottomLeftRadius: 30,
-        borderBottomRightRadius: 30,
+        // minHeight: Dimensions.get('screen').height * 0.14,
+        borderBottomLeftRadius: 10,
+        borderBottomRightRadius: 10,
+        paddingVertical: 10
         
 
     },
@@ -68,7 +82,8 @@ const styles = StyleSheet.create({
         height: Dimensions.get('screen').height * 0.079,
         display: 'flex',
         flexDirection: 'row',
-        justifyContent: 'space-between',
+        alignItems: 'center',
+        // justifyContent: 'space-between',
         // paddingTop: 30,
         paddingHorizontal: 20,
     },

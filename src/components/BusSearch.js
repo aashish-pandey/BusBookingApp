@@ -5,26 +5,29 @@ import { View, Text, Dimensions, TouchableOpacity } from 'react-native'
 import BusInfoCard from './cards/BusInfoCard'
 
 import BusBookHeading from './cards/BusBookHeading'
+import { useRoute } from '@react-navigation/native'
 
 
 
 export default function BusSearch({ navigation }) {
 
+    const route = useRoute();
+    const {response, dataToSend} = route.params;
+    
+    console.log("Bus search")
+    console.log(response)
     
     return (
         <>
         <ScrollView>
             <View style={styles.main}>
-                <BusBookHeading parent={'home'}/>
+                <BusBookHeading parent={'home'} data={dataToSend}/>
 
                 <View style={styles.busInfo}>
-                <BusInfoCard />
-                <BusInfoCard />
-                <BusInfoCard />
-                <BusInfoCard />
-                <BusInfoCard />
-                <BusInfoCard />
-                <BusInfoCard />
+                {response.map(data=>(
+                    <BusInfoCard key={data.id} data={data}/>
+                ))}
+
                 </View>
 
             </View>
