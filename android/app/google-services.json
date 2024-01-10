@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "734783499533",
+    "project_id": "merobus-a190a",
+    "storage_bucket": "merobus-a190a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:734783499533:android:4dc1164acfd39127b45444",
+        "android_client_info": {
+          "package_name": "com.myproject.try1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBXIMBumuoAa9JEWlSzDCYKFHJwE-X2W0A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

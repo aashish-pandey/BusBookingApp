@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, Dimensions, TouchableOpacity, TextInput, Button } from 'react-native';
+import { StyleSheet, Text, View, Dimensions, Alert, TouchableOpacity, TextInput, Button, PermissionsAndroid, Linking, Platform } from 'react-native';
 
 import DeviceInfo from 'react-native-device-info';
+import messaging from '@react-native-firebase/messaging';
+import axios from 'axios';
+
 
 import Map from './src/components/Map';
 import Home from './src/components/Home';
@@ -37,71 +40,127 @@ export default function App() {
 
   const [selectedTab, setSelectedTab] = useState(selectedPage);
   const [loginStatus, setLoginStatus] = useState('false');
+  const [permissionGranted, setPermissionGranted] = useState(false);
 
   const selectedPage = useSelector((state)=>{
     return state.page;
   });
-  // if(selectedPage != selectedTab)setSelectedTab(selectedPage);
-  // console.log(selectedPage)
+
+  console.log(Platform.Version);
+
+
+  const openAppSettings = ()=>{
+    Linking.openSettings();
+  }
+
+  function guideToAppSettings(){
+  Alert.alert('Permission Required', 
+    'To use this feature, grant the notification permission in the app settings.',
+    [
+      { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
+      { text: 'Open Settings', onPress: openAppSettings },
+    ],
+    { cancelable: false }
+  )
+}
+
+  async function checkApplicationPermissions(){
+    try{
+      const granted = await PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS,
+        )
+        console.log(granted)
+        if(granted === PermissionsAndroid.RESULTS.GRANTED){
+          setPermissionGranted(true);
+          // clearInterval(intervalPermissionAsking);
+          // console.log("granted");
+        }else{
+          guideToAppSettings();
+          // console.log("not granted");
+        }
+        
+    }catch(error){
+      console.log("error while asking permission", error);
+    }
+  }
+
+  useEffect(()=>{
+    if(Platform.Version >= 34){
+      console.log("asdfghjpi")
+      checkApplicationPermissions();
+    }else{
+      setPermissionGranted(true)
+    }
+  }, [])
+  var intervalPermissionAsking;
+  if(!permissionGranted){
+
+    //  intervalPermissionAsking = setInterval(checkApplicationPermissions, 10000);
+  }
+  if(permissionGranted){
+    // clearInterval(intervalPermissionAsking);
+  }
+
+
 
   const loginStatusInfo = useSelector((state)=>{
     return state.loginStatus;
   })
 
+  const getDeviceToken = async()=>{
+    try{
+      let token = await messaging().getToken();
+      setDeviceToken(token);
   
+      console.log(token);
+
+    }catch(error){
+      console.log(error)
+    }
+  }
+  
+  const setDeviceToken = async(token)=>{
+    try{
+
+      if(token){
+      const dataToSend = {
+        token: token,
+      }
+      console.log(dataToSend)
+      const result = await axios.post('https://backend.merobus.xyz/setFCMToken', dataToSend);
+      if(result.status === 201){
+        console.log("Token Set Successful");
+      }else{
+        console.log("Token set failed");
+      }
+    }
+  }catch(error){
+    console.log(error)
+  }
+  }
+  getDeviceToken();
 
   useEffect(()=>{
 
-    DeviceInfo.getAndroidId().then((androidId) => {
-      // androidId here
-      console.log(androidId);
-    });
 
+    // DeviceInfo.getAndroidId().then((androidId) => {
+    //   // androidId here
+    //   console.log(androidId);
+    // });
+    // checkApplicationPermission();
     setSelectedTab(selectedPage);
     setLoginStatus(loginStatusInfo);
   }, [selectedPage, loginStatus])
 
+  useEffect(()=>{
+    const unsubsribe = messaging().onMessage(async remoteMessage => {
+      Alert.alert('A new FCM message arrived', JSON.stringify(remoteMessage))
+    });
 
-  const [searchInput, setSearchInput] = useState('');
-  // const [markerCoordinates, setMarkerCoordinates] = useState({
-  //   latitude: 37.78825,
-  //   longitude: -122.4324,
-  // });
+    return unsubsribe;
+  }, [])
 
 
-
-  const [mapRegion, setMapRegion] = useState({
-    latitude: 37.78825,
-    longitude: -122.4324,
-    latitudeDelta: 0.922,
-    longitudeDelta: 0.0421,
-  });
-  
-  const handleSearch = async () => {
-    try {
-      const formattedAddress = searchInput.replace(/\s/g, '+');
-      const response = await fetch(
-        `https://nominatim.openstreetmap.org/search?q=${formattedAddress}&format=json`
-      );
-  
-      if (!response.ok) {
-        throw new Error('Network response was not ok.');
-      }
-  
-      const data = await response.json();
-      if (data && data.length > 0) {
-        const { lat, lon } = data[0]; // Latitude and Longitude
-        setMarkerCoordinates({ latitude: parseFloat(lat), longitude: parseFloat(lon) });
-        setMapRegion({latitude: parseFloat(lat), longitude: parseFloat(lon), latitudeDelta: 0.0922, longitudeDelta: 0.0421,});
-        console.log("working ")
-      } else {
-        Alert.alert('Location not found', 'Please try another location.');
-      }
-    } catch (error) {
-      console.error('Error fetching geocoding data:', error);
-      Alert.alert('Error', 'There was an error processing your request.');
-    }
-  };
   
   const renderTabContent = () => {
     switch (selectedTab) {
@@ -159,10 +218,7 @@ export default function App() {
     <View style={styles.container}>
       
       {renderTabContent()}
-
-      {/* <MainBottomBar/> */}
-      
-
+    
     </View>
 
   );
@@ -172,27 +228,5 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     // backgroundColor: "#fff",
-  },
-  bottomNav: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    backgroundColor: '#E2FFE7',
-    // top: 0,
-    bottom: 5,
-    paddingVertical: 20,
-    width: Dimensions.get('screen').width * 0.98,
-    marginLeft: Dimensions.get('screen').width * 0.01,
-    borderRadius: 40,
-    position: 'absolute'
-  },
-
-  tab: {
-    alignItems: 'center',
-  },
-  tabContent: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
 });

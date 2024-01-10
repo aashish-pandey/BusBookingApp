@@ -145,72 +145,7 @@ export default function PassengerInformation() {
 
                
                 </View>
-                <View style={styles.contactDetailsSection}>
-        {/* this is for the contact details section. Information about the tickets and details will be sent to the information received from this section */}
-                    <Text style={styles.contactDetailsMainHeadingTxt}>Contact Details</Text>
-                    <Text style={styles.contactDetailsSubHeadingTxt}>Your tickets and bus details will be sent in here</Text>
-
-                    <View>
-
-                        <View>
-                            <View>
-                                <TextInput 
-                                    style={styles.inputBox}
-                                    placeholder="Name"
-                                />
-                            </View>
-                            <View>
-                                <TextInput 
-                                    style={styles.inputBox}
-                                    placeholder='Email Id'
-                                />
-                            </View>
-
-                            <View>
-                                <TextInput 
-                                    style={styles.inputBox}
-                                    placeholder='Phone Number'
-                                />
-                            </View>
-                        </View>
-
-                    </View>
-
-               
-                </View>
-                <View style={styles.contactDetailsSection}>
-        {/* this is for the contact details section. Information about the tickets and details will be sent to the information received from this section */}
-                    <Text style={styles.contactDetailsMainHeadingTxt}>Contact Details</Text>
-                    <Text style={styles.contactDetailsSubHeadingTxt}>Your tickets and bus details will be sent in here</Text>
-
-                    <View>
-
-                        <View>
-                            <View>
-                                <TextInput 
-                                    style={styles.inputBox}
-                                    placeholder="Name"
-                                />
-                            </View>
-                            <View>
-                                <TextInput 
-                                    style={styles.inputBox}
-                                    placeholder='Email Id'
-                                />
-                            </View>
-
-                            <View>
-                                <TextInput 
-                                    style={styles.inputBox}
-                                    placeholder='Phone Number'
-                                />
-                            </View>
-                        </View>
-
-                    </View>
-
-               
-                </View>
+                
 
                 {/* <View>
                     <View>

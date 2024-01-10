@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
-import { StyleSheet, Text, View, Dimensions, TouchableOpacity, TextInput, Button, Platform, ScrollView, Pressable } from 'react-native';
+import React, { useRef, useState } from 'react';
+import { StyleSheet, Text, View, Dimensions, TouchableOpacity, TextInput, Button, Platform, ScrollView, Pressable, TouchableWithoutFeedback, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import JourneyCard from './cards/JourneyCard';
 import MainBottomBar from './MainBottomBar';
+import axios from 'axios';
 
 
 
@@ -12,16 +13,28 @@ export default function Home({ navigation }) {
     const [toLocation, setToLocation] = useState('');
     const [selectedDate, setSelectedDate] = useState('');
     const [date, setDate] = useState(new Date())
-    const [statusDatePicker, setStatusDatePicker] = useState(false)
+    const [statusDatePicker, setStatusDatePicker] = useState(false);
 
-    const handleSearch = () => {
+    const inputRef = useRef(null);
+
+    const handleSearch = async() => {
         console.log('Searching for:', {
             singleTrip: true,
             fromLocation,
             toLocation,
             selectedDate,
         });
-        navigation.navigate('busSearch')
+        try{
+
+            const response =  await axios.post('http://localhost:3000/')
+            console.log(response)
+
+            navigation.navigate('busSearch')
+        }catch(error){
+            console.log(error);
+            Alert.alert("Cannot search for the entered values at the moment! please try again later")
+        }
+
     };
 
     const handleSwapLocations = () => {
@@ -43,8 +56,13 @@ export default function Home({ navigation }) {
         
     }
 
+    const handlePressOutside = () => {
+        
+      };
+
     return (
-        <>
+        <TouchableWithoutFeedback onPress={handlePressOutside}>
+            <>
 
             <View style={styles.header}>
                 <View style={styles.textContainer}>
@@ -142,20 +160,13 @@ export default function Home({ navigation }) {
             </ScrollView>
             <MainBottomBar />
         </>
+        </TouchableWithoutFeedback>
     )
 
 };
 
 
 const styles = StyleSheet.create({
-
-    mainStart: {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        // backgroundColor: 'white',
-        // minHeight: Dimensions.get('screen').height
-    },
 
     header: {
         flexDirection: 'row',
@@ -169,6 +180,17 @@ const styles = StyleSheet.create({
         position: 'relative',
         top: 0
     },
+
+    mainStart: {
+        flex: 1,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        // backgroundColor: 'white',
+        height: Dimensions.get('screen').height*0.9
+    },
+
+    
     textContainer: {
         flexDirection: 'row',
         alignItems: 'center',
@@ -244,7 +266,7 @@ const styles = StyleSheet.create({
         marginBottom: 10,
     },
     oneWayBtnTxt: {
-        fontSize: 18,
+        fontSize: 14,
         color: 'white',
 
     },
@@ -265,11 +287,11 @@ const styles = StyleSheet.create({
     input: {
         flex: 1,
         marginLeft: 10,
-        fontSize: 16,
-        padding: 10
+        fontSize: 14,
+        padding: 8
     },
     icon: {
-        padding: 15,
+        padding: 10,
 
 
     },
@@ -288,19 +310,19 @@ const styles = StyleSheet.create({
     },
     searchButton: {
         backgroundColor: '#FD6905',
-        borderRadius: 20,
+        borderRadius: 8,
         padding: 12,
-        paddingVertical: 20,
-        marginTop: 30,
+        paddingVertical: 10,
+        // marginTop: 20,
         alignItems: 'center',
-        marginVertical: 30
+        marginVertical: 20
     },
     dateInput: {
         backgroundColor: '#F6F5FA'
     },
     searchButtonText: {
         color: 'white',
-        fontSize: 16,
+        fontSize: 15,
         fontWeight: 'bold',
 
     },

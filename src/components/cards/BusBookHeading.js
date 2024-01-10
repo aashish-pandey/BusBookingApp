@@ -58,14 +58,14 @@ const styles = StyleSheet.create({
     heading: {
         backgroundColor: '#129C38',
         width: Dimensions.get('screen').width,
-        height: Dimensions.get('screen').height * 0.2,
+        height: Dimensions.get('screen').height * 0.14,
         borderBottomLeftRadius: 30,
         borderBottomRightRadius: 30,
         
 
     },
     headingTopRow:{
-        height: Dimensions.get('screen').height * 0.1,
+        height: Dimensions.get('screen').height * 0.079,
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -76,13 +76,15 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center', 
+        
 
     },
     headingText: {
         color: '#fff',
         fontSize: 20,
-        margin: 20,
+        // margin: 20,
+        marginHorizontal: 20
     },
     busInfo: {
         display: 'flex',

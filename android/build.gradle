@@ -1,3 +1,5 @@
+
+
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
@@ -19,8 +21,11 @@ buildscript {
     dependencies {
         classpath('com.android.tools.build:gradle:7.4.2')
         classpath('com.facebook.react:react-native-gradle-plugin')
+        classpath 'com.google.gms:google-services:+'
     }
 }
+
+
 
 allprojects {
     repositories {
@@ -38,3 +43,5 @@ allprojects {
         maven { url 'https://www.jitpack.io' }
     }
 }
+
+
