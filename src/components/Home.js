@@ -26,6 +26,7 @@ export default function Home({ navigation }) {
   const [statusDatePicker, setStatusDatePicker] = useState(false);
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [date, setDate] = useState("");
+  const [activeButton, setActiveButton] = useState(null);
   const inputRef = useRef(null);
 
   const handleSearch = async () => {
@@ -68,6 +69,7 @@ export default function Home({ navigation }) {
 
   const showDatePicker = () => {
     setDatePickerVisibility(true);
+    setActiveButton("allday");
   };
 
   const hideDatePicker = () => {
@@ -84,6 +86,18 @@ export default function Home({ navigation }) {
     // Format the date to a readable format
     // Example: 2021-05-18
     return date.toISOString().split("T")[0];
+  };
+
+  const setToday = () => {
+    setDate(formatDate(new Date())); // Sets the current date
+    setActiveButton("today");
+  };
+
+  const setTomorrow = () => {
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1); // Adds one day
+    setDate(formatDate(tomorrow));
+    setActiveButton("tomorrow");
   };
 
   const handlePressOutside = () => {};
@@ -123,10 +137,6 @@ export default function Home({ navigation }) {
 
             <View style={styles.formView}>
               <View style={styles.container}>
-                <TouchableOpacity style={styles.oneWayBtn}>
-                  <Text style={styles.oneWayBtnTxt}>One Way</Text>
-                </TouchableOpacity>
-
                 <View style={styles.inputGroup}>
                   <View style={[styles.iconView, styles.icon1]}>
                     <Icon
@@ -191,6 +201,19 @@ export default function Home({ navigation }) {
                     mode="date"
                     onConfirm={handleConfirm}
                     onCancel={hideDatePicker}
+                  />
+                </View>
+
+                <View style={styles.buttonContainer}>
+                  <Button
+                    color={activeButton === "today" ? "green" : "gray"}
+                    title="Today"
+                    onPress={setToday}
+                  />
+                  <Button
+                    color={activeButton === "tomorrow" ? "green" : "gray"}
+                    title="Tomorrow"
+                    onPress={setTomorrow}
                   />
                 </View>
 
@@ -294,19 +317,6 @@ const styles = StyleSheet.create({
     borderRadius: 25,
   },
 
-  oneWayBtn: {
-    width: Dimensions.get("window").width * 0.4,
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    // paddingLeft: 30,
-    backgroundColor: "#129C38",
-    borderRadius: 8,
-    marginBottom: 10,
-  },
-  oneWayBtnTxt: {
-    fontSize: 14,
-    color: "white",
-  },
   inputGroup: {
     flexDirection: "row",
     alignItems: "center",
@@ -373,5 +383,12 @@ const styles = StyleSheet.create({
 
   rotatedIcon: {
     transform: [{ rotate: "90deg" }],
+  },
+
+  buttonContainer: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    width: "70%",
+    paddingVertical: 10,
   },
 });
