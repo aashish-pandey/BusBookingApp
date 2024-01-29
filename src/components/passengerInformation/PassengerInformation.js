@@ -1,6 +1,6 @@
 import { View, Text, TouchableOpacity, TextInput, StyleSheet, Dimensions } from 'react-native'
 import React from 'react'
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation, useRoute } from '@react-navigation/native'
 import { ScrollView } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -8,6 +8,9 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 export default function PassengerInformation() {
 
     const navigation = useNavigation();
+    const routes = useRoute();
+
+    const {busId} = routes.params;
 
     const busInfo = {
         busOperator: "Mahakali Yatayat",
@@ -31,11 +34,11 @@ export default function PassengerInformation() {
     var totalAmount = busInfo.ticketPrice;
 
     const handleGoToPaymentPage = () => {
-        navigation.navigate('paymentPage');
+        navigation.navigate('paymentPage', {busId});
     }
 
     const handleGoBack =()=>{
-        navigation.navigate('chooseSeats');
+        navigation.navigate('chooseSeats', {busId});
     }
 
 

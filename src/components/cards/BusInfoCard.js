@@ -7,29 +7,13 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native'
 
 export default function BusInfoCard({data}) {
-    console.log("card")
-    console.log(data);
-    // const busInfo = {
-    //     busOperator: "Mahakali Yatayat",
-    //     origin: 'Kathmandu',
-    //     destination: 'Pokhara',
-    //     startTime: '7:50 PM',
-    //     endTime: '4:20 AM',
-    //     travelTime: '8 hr 30 min',
-    //     startDate: '19 feb 2024',
-    //     endDate: '20 feb 2024',
-    //     ticketPrice: 'Rs 1500',
-    //     remainingSeats: '2',
-    //     totalSeats: '36',
-    //     type: 'AC'
-    // }
+    
 
     const busInfo = data;
-
+    const busId = busInfo.id;
     const navigation = useNavigation();
-
     const handleSeatSelection = () => {
-        navigation.navigate('chooseSeats')
+        navigation.navigate('chooseSeats', {busId});
     }
 
     return (

@@ -1,30 +1,162 @@
-import {React, useState} from 'react'
-import { ScrollView , View, Text, StyleSheet, Dimensions} from 'react-native'
+import {React, useEffect, useState} from 'react'
+import { ScrollView , View, Text, StyleSheet, Dimensions, Alert} from 'react-native'
 import BusBookHeading from './cards/BusBookHeading'
 import { TouchableOpacity } from 'react-native-gesture-handler'
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation, useRoute } from '@react-navigation/native'
+import { useSelector } from 'react-redux'
+import { getBusSeatInfo, makeTicket } from '../services/api'
 
 export default function ChooseSeats() {
 
     const navigation = useNavigation()
-    var bookInfo = {
-        operator: 'Mahakali Yatayat',
-        startTime: '7:50 PM',
-        type: 'AC(2)',
-        price: 'Rs 1500'
+    const routes = useRoute();
+
+
+    const[busLayoutInfo, setBusLayoutInfo] = useState({});
+
+    const [selectedSeats, setSelectedSeats] = useState(new Set());
+  
+    const {busId} = routes.params;
+    console.log("bus id: ", busId);
+
+    let busDetails = useSelector((state)=>{
+        return state.journeyInfo
+    })
+
+    // console.log(busDetails)
+    const getBusById = (busList, busId)=>{
+        const selectedBus = busList.find(bus=> bus.id === busId);
+        return selectedBus || null;
+    }
+    
+
+    busDetails = getBusById(busDetails, busId);
+
+    if(!busDetails){
+        busDetails = {
+            operator: "",
+            departureTime: "",
+            busType: "",
+            ticketPrice: ""
+        }
     }
 
-    const [seatSelected, setSeatSelected] = useState(false)
 
-const handleSeatSelection = ()=>{
-    setSeatSelected(!seatSelected)
+
+
+const handleBookNow = async()=>{
+    // navigation.navigate('passengerInformation', {busId})
+    try{
+    let dt = Array.from(selectedSeats);
+    // Alert.alert(
+    //     'Selected Seats',
+    //     `You have selected: ${dt.join(', ')}`,
+    //     [{ text: 'OK', onPress: () => console.log('OK Pressed') }]
+    //   );
+
+
+      let dataToSend = {
+        id: busId,
+        seat: dt
+      }
+
+      const response = await makeTicket(dataToSend);
+      Alert.alert(response);
+      console.log(response);
+
+      }catch(error){
+        console.log(error);
+        Alert.alert("Cannot book tickets now!! please try again");
+      }
 }
 
-const handleBookNow = ()=>{
-    navigation.navigate('passengerInformation')
+const handleBusSeatsInfo = async function(busId){
+    try{
+
+        const dataToSend = {
+            busId: busId
+        }
+
+        const response = await getBusSeatInfo(dataToSend)
+        await setBusLayoutInfo(response.data);
+        // return response.data;
+
+    }catch (error){
+        console.log(error);
+        Alert.alert("Something went wrong!! Please try again later");
+        
+    }
 }
 
-  return (
+
+useEffect(()=>{
+    if(!busId){
+        busId = routes.params.busId;
+    }
+   handleBusSeatsInfo(busId);
+
+    
+}, [])
+
+useEffect(()=>{
+
+}, [busLayoutInfo])
+
+const renderSeat = (seat, index)=>{
+   
+
+    const handleSeatClick = (seat) => {
+        // Create a new Set with the current selected seats
+        const newSelectedSeats = new Set(selectedSeats);
+    
+        if (newSelectedSeats.has(seat)) {
+          // If the seat is already selected, remove it
+          newSelectedSeats.delete(seat);
+        } else {
+          // If the seat is not selected, add it
+          newSelectedSeats.add(seat);
+        }
+    
+        // Update the state with the new selected seats
+        setSelectedSeats(newSelectedSeats);
+        console.log("added: ", seat)
+      };
+    if(seat.displayName == 'na'){
+        return(
+            <View key={`${seat.displayName}_${index}`} style={styles.noseat}>
+
+            </View>
+        )
+    }
+    else{
+        let isSelected = selectedSeats.has(seat.displayName);
+        let seatColour = '#fff';
+        if(seat.bookingStatus == "yes")seatColour = '#129C38';
+        
+        
+
+        return(
+            <TouchableOpacity key={seat.displayName} onPress={()=>handleSeatClick(seat.displayName)}>
+                <View style={[styles.seat, { backgroundColor: isSelected ? '#FD6905' : seatColour }]}>
+                        <Text>{seat.displayName}</Text>
+                </View>
+            </TouchableOpacity>
+        )
+    }
+
+}
+
+const renderRow= (row)=>{
+    
+    return(
+        <View key={row} style={styles.seatRow}>
+            {busLayoutInfo.seatLayout.slice(row * busLayoutInfo.noOfColumn, (row + 1) * busLayoutInfo.noOfColumn).map(renderSeat)}
+        </View>
+    )
+}
+
+
+return (
     <View>
       <ScrollView>
         <View style={styles.main}>
@@ -33,11 +165,11 @@ const handleBookNow = ()=>{
             <View style={styles.detailsBox}>
                    <View style={styles.detailsRow}>
                         <Text style={styles.operatorText}>
-                            {bookInfo.operator}
+                            {busDetails.operator}
                         </Text>
 
                         <Text style={styles.timeText}>
-                            {bookInfo.startTime}
+                            {busDetails.departureTime}
                         </Text>
                    </View>
 
@@ -45,14 +177,14 @@ const handleBookNow = ()=>{
                         <View style={styles.detailSubRow}>
                             <Text style={styles.subInfoText}>Type:</Text>
                             <Text style={[styles.subValueText, styles.orangeText]}>
-                                {bookInfo.type}
+                                {busDetails.busType}
                             </Text>
                         </View>
 
                         <View style={styles.detailSubRow}>
                             <Text style={styles.subInfoText}>Price:</Text>
                             <Text style={styles.subValueText}>
-                                {bookInfo.price}
+                                {busDetails.ticketPrice}
                             </Text>
                         </View>
                    </View>
@@ -82,7 +214,12 @@ const handleBookNow = ()=>{
             <View style={styles.busOutline}>
 
                 <View style={styles.seatSection}>
-                    <View style={styles.seatRow}>
+
+                    
+
+                    {busLayoutInfo.seatLayout && busLayoutInfo.seatLayout.length && Array.from({length: busLayoutInfo.seatLayout.length / busLayoutInfo.noOfColumn}, (_, index)=>renderRow(index))}
+                    {/* {console.log(busLayoutInfo)} */}
+                    {/* <View style={styles.seatRow}>
                     <View style={[styles.seat, seatSelected ? styles.orangeSeat : styles.whiteSeat]}>
                         <TouchableOpacity onPress={handleSeatSelection} style={styles.seatBtn}>
                             <Text>A1</Text>
@@ -148,7 +285,7 @@ const handleBookNow = ()=>{
                     <View style={styles.noseat}></View>
                     <View style={styles.seat}></View>
                     <View style={styles.seat}></View>
-                    </View>
+                    </View> */}
 
                 </View>
 
@@ -336,8 +473,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#129C38'
     },
     noseat: {
-        height: 40,
-        width: 80,
+        height: 45,
+        width: 45,
         backgroundColor: '#CDEED6'
     },
     bookNowBtn:{

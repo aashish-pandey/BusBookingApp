@@ -111,7 +111,7 @@ export default function Register() {
             </View>
             <View>
 
-            <TextInput ref={passwordRef} secureTextEntry = {showPassword} style={styles.inputBox} placeholder='Enter your password' placeholderTextColor='#999' onChangeText={data=>setPassword(data)}/>
+            <TextInput ref={passwordRef} secureTextEntry = {!showPassword} style={styles.inputBox} placeholder='Enter your password' placeholderTextColor='#999' onChangeText={data=>setPassword(data)}/>
             <TouchableOpacity onPress={tooglePasswordVisibility} style={styles.togglePasswordButton}>
             <Icon name={showPassword ? 'eye' : 'eye-slash'} size={24} color="black" />
             </TouchableOpacity>

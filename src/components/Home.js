@@ -8,6 +8,7 @@ import { getTripInfo } from '../services/api';
 import { useDispatch } from 'react-redux';
 import { setJourneyInfo } from '../store/slices/journeyInfoSlice';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
+import { setTripSearch } from '../store/slices/tripSearchSlice';
 
 
 export default function Home({ navigation }) {
@@ -25,15 +26,17 @@ export default function Home({ navigation }) {
     
         try{
 
+          console.log("Hitted")
+
             const dataToSend = {
                 from: fromLocation,
                 to: toLocation,
                 date: date
             }
-
+            dispatch(setTripSearch(dataToSend));
             const response = await getTripInfo(dataToSend);
             dispatch(setJourneyInfo(response))
-
+            console.log(response)
             navigation.navigate('busSearch', {response, dataToSend})
         }catch(error){
             console.log(error);

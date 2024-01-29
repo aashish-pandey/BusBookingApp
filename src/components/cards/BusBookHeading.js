@@ -5,19 +5,25 @@ import { View, Text, Dimensions, TouchableOpacity } from 'react-native'
 import BusInfoCard from './BusInfoCard'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native'
+import { useSelector } from 'react-redux'
 
-export default function BusBookHeading({parent, data}) {
+export default function BusBookHeading({parent}) {
     const navigation = useNavigation()
 
-    let dt = {
-        from: '',
-        to: '',
-        data: ''
-    }
+    // let dt = {
+    //     from: '',
+    //     to: '',
+    //     data: ''
+    // }
 
-    if(!data){
-        data = dt;
-    }
+    // if(!data){
+    //     data = dt;
+    // }
+
+    const data = useSelector((state)=>{
+        return state.tripSearch
+    })
+
     console.log(data)
     const handleGoBack = ()=>{
         navigation.navigate(parent)
@@ -74,7 +80,8 @@ const styles = StyleSheet.create({
         // minHeight: Dimensions.get('screen').height * 0.14,
         borderBottomLeftRadius: 10,
         borderBottomRightRadius: 10,
-        paddingVertical: 10
+        paddingVertical: 10,
+        paddingBottom: 30
         
 
     },

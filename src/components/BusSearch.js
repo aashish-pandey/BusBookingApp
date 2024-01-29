@@ -6,13 +6,25 @@ import BusInfoCard from './cards/BusInfoCard'
 
 import BusBookHeading from './cards/BusBookHeading'
 import { useRoute } from '@react-navigation/native'
+import { useSelector } from 'react-redux'
 
 
 
-export default function BusSearch({ navigation }) {
+export default function BusSearch() {
 
     const route = useRoute();
-    const {response, dataToSend} = route.params;
+    // const {dataToSend} = route.params;
+
+    const dataToSend = useSelector((state)=>{
+        return state.tripSearch
+    })
+    const response = useSelector((state)=>{
+        return state.journeyInfo
+    })
+
+    
+    // console.log("Data from redux")
+    // console.log(journeyInfo)
     
     console.log("Bus search")
     console.log(response)

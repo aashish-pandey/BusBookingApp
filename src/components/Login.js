@@ -138,7 +138,7 @@ export default function Login() {
                     <TextInput
                     ref={inputRefPassword}
                         style={styles.inputBox}
-                        secureTextEntry={showPassword}
+                        secureTextEntry={!showPassword}
                         value={password}
                         placeholder='Enter your password'
                         placeholderTextColor='#999'

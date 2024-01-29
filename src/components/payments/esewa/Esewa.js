@@ -27,14 +27,7 @@ export default function Esewa() {
   }
 
 
-  const webViewRef = useRef(null);
 
-  const injectJavaScript = `
-    document.getElementById('total_amount').value = '100';
-    document.getElementById('transaction_uuid').value = '11-200-111sss1';
-    document.getElementById('product_code').value = 'EPAYTEST';
-    document.getElementById('secret').value = '8gBm/:&EnhH.1/q';
-  `;
     
       return (
           <WebView

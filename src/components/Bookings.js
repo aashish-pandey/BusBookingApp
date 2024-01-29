@@ -8,7 +8,7 @@ export default function Bookings(){
     return(
         <>
         <ScrollView>
-            <View style = {styles.tabContent}>
+            {/* <View style = {styles.tabContent}>
                 <Text style = {styles.textHeading}>
                     Upcoming Journey (2)
                 </Text>
@@ -27,7 +27,7 @@ export default function Bookings(){
                     <JourneyCard/>
                     <JourneyCard/>
                 </View>
-            </View>
+            </View> */}
         </ScrollView>
         <MainBottomBar/>
         </>
