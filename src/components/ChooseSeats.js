@@ -3,13 +3,16 @@ import { ScrollView , View, Text, StyleSheet, Dimensions, Alert} from 'react-nat
 import BusBookHeading from './cards/BusBookHeading'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { useNavigation, useRoute } from '@react-navigation/native'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { getBusSeatInfo, makeTicket } from '../services/api'
+import { setTicketHoldInfo } from '../store/slices/ticketHoldSlice'
+
 
 export default function ChooseSeats() {
 
     const navigation = useNavigation()
     const routes = useRoute();
+    const dispatch = useDispatch();
 
 
     const[busLayoutInfo, setBusLayoutInfo] = useState({});
@@ -37,11 +40,12 @@ export default function ChooseSeats() {
             operator: "",
             departureTime: "",
             busType: "",
-            ticketPrice: ""
+            ticketPrice: "",
+            destination: "",
         }
     }
 
-
+    console.log(busDetails)
 
 
 const handleBookNow = async()=>{
@@ -61,8 +65,27 @@ const handleBookNow = async()=>{
       }
 
       const response = await makeTicket(dataToSend);
-      Alert.alert(response);
-      console.log(response);
+    //   Alert.alert(response);
+
+      const ticketHoldInfoRedux = {
+        id: busId,
+        ticketSrlNo: response.ticketSrlNo,
+        departureDate: "",
+        arrivalDate: "",
+        departure: response.boardingPoints[0],
+        arrivalLocation: busDetails.destination,
+        operator: busDetails.operator,
+        ticketPrice: busDetails.ticketPrice,
+        departureTime: "",
+        holdStartingTime: "",
+      }
+
+      console.log(ticketHoldInfoRedux)
+      dispatch(setTicketHoldInfo(ticketHoldInfoRedux));
+
+    
+    //   console.log(response);
+    navigation.navigate('passengerInformation', {busId})
 
       }catch(error){
         console.log(error);

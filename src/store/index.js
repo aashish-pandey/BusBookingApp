@@ -6,6 +6,8 @@ import userSlice from "./slices/userSlice";
 import loginSlice from "./slices/loginSlice";
 import journeyInfoSlice from "./slices/journeyInfoSlice";
 import tripSearchSlice from "./slices/tripSearchSlice";
+import ticketHoldSlice from "./slices/ticketHoldSlice";
+import selectedBusDetailsSlice from "./slices/selectedBusDetailsSlice";
 
 const store = configureStore({
     reducer:{
@@ -14,6 +16,8 @@ const store = configureStore({
         loginStatus: loginSlice,
         journeyInfo: journeyInfoSlice,
         tripSearch: tripSearchSlice,
+        ticketHold: ticketHoldSlice,
+        selectedBusDetails: selectedBusDetailsSlice,
     },
 })
 

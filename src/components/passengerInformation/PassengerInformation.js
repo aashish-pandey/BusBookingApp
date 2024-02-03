@@ -1,8 +1,9 @@
 import { View, Text, TouchableOpacity, TextInput, StyleSheet, Dimensions } from 'react-native'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useNavigation, useRoute } from '@react-navigation/native'
 import { ScrollView } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { useSelector } from 'react-redux';
 
 
 export default function PassengerInformation() {
@@ -12,18 +13,29 @@ export default function PassengerInformation() {
 
     const {busId} = routes.params;
 
+
+        let busDetails = useSelector(state=>{
+            return state.ticketHold
+        });
+
+        console.log("bus details", busDetails)
+
+
+
+    
+
     const busInfo = {
-        busOperator: "Mahakali Yatayat",
-        origin: 'Kathmandu',
+        busOperator: busDetails.operator,
+        origin: busDetails.departure,
         destination: 'Pokhara',
-        boardingPoint: 'KTM Bus Park',
+        boardingPoint: busDetails.departure,
         droppingPoint: 'Baglung Bus Park',
-        startTime: '7:50 PM',
+        startTime: '',
         endTime: '4:20 AM',
         travelTime: '8 hr 30 min',
         startDate: '19 feb 2024',
         endDate: '20 feb 2024',
-        ticketPrice: 'Rs 1500',
+        ticketPrice: busDetails.ticketPrice,
         remainingSeats: '2',
         totalSeats: '36',
         type: 'AC',

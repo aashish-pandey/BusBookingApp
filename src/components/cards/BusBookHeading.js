@@ -26,6 +26,7 @@ export default function BusBookHeading({parent}) {
 
     console.log(data)
     const handleGoBack = ()=>{
+        
         navigation.navigate(parent)
     }
   return (
